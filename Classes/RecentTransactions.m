@@ -167,6 +167,9 @@
 	cell.balance.text = balance;
 	
 	if ([[amount substringToIndex:1] isEqualToString:@"-"]) {
+		// 12/16/11 CHANGE
+		// Added this here to make the random green amounts go away
+		cell.amount.textColor = [UIColor blackColor];
 	} else {
 		cell.amount.textColor = [UIColor colorWithRed:0 green:128/255.0 blue:0 alpha:1.0];
 
