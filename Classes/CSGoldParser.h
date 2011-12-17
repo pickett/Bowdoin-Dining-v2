@@ -27,6 +27,8 @@
 	
 }
 
+@property (nonatomic, retain) NSString *tempSmallValue;
+@property (nonatomic, retain) NSString *tempMediumValue;
 @property (nonatomic, retain) NSString *smallBucket;
 @property (nonatomic, retain) NSString *mediumBucket;
 
