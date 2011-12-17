@@ -11,7 +11,7 @@
 
 @implementation CSGoldParser
 
-@synthesize smallBucket, mediumBucket; 
+@synthesize smallBucket, mediumBucket, tempSmallValue, tempMediumValue; 
 - (void)parseWithData:(NSData *)data{
 		
 	theParser = [[NSXMLParser alloc] initWithData:data];
