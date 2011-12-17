@@ -163,8 +163,11 @@
 
 	cell.location.text = location;
 	cell.date.text =  date;
-    cell.amount.text = amount;
+    	cell.amount.text = amount;
 	cell.balance.text = balance;
+	// 12/16/11 CHANGE
+	// Made the cells unclickable, looks nicer
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
 	if ([[amount substringToIndex:1] isEqualToString:@"-"]) {
 		// 12/16/11 CHANGE
