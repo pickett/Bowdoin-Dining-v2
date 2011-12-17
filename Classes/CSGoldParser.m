@@ -57,6 +57,8 @@
 #define onecard 1
 #define polarpoints 2
 #define NAaccount 3
+#define fall 1
+#define spring 2
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
 	
@@ -88,6 +90,7 @@
         	else{
         	    currentSVCAccount = NAaccount;
         	}
+            [watch release];
 	}
 	// END CHANGE
 	else if ([elementName isEqualToString:@"dtCSGoldSVCBalances"]) {
@@ -100,18 +103,34 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
 	
-	// Polar Points
+    // 12/16/11 CHANGES
+	// The Buckets get messed up depending on whether its fall or spring
+    // The server response gives the SVCPlanDescription after the buckets
+    // so I implemented a temp value
+    // The temp values are now held, and if the plan description matches the date,
+    // the values are put into the buckets
+    if ([currentElement isEqualToString:@"SVCPLANDESCRIPTION"]){
+        WristWatch *watch = [[WristWatch alloc] init];
+        if([string hasPrefix:@"Fall"] && 25 <= [watch getWeekofYear]){
+            self.mediumBucket = [NSString stringWithFormat:@"%d", tempMediumValue];
+            self.smallBucket = [NSString stringWithFormat:@"%d", tempSmallValue];
+        }
+        if([string hasPrefix:@"Spring"] && 0 <= [watch getWeekofYear] && 24 >= [watch getWeekofYear]){
+            self.mediumBucket = [NSString stringWithFormat:@"%d", tempMediumValue];
+            self.smallBucket = [NSString stringWithFormat:@"%d", tempSmallValue];
+        }
+        [watch release];
+            
+    }
 	if ([currentElement isEqualToString:@"MEDIUMBUCKET"]) {
-		NSLog(@"Medium Bucket = %@", string);
-		self.mediumBucket = string;
+        NSLog(@"Medium Bucket = %@", string);
+        tempMediumValue = [string intValue];
+
 	}
-	
 	if ([currentElement isEqualToString:@"SMALLBUCKET"]) {
 		NSLog(@"Small Bucket = %@", string);
-		self.smallBucket = string;
+        tempSmallValue = [string intValue];
 	}
-	
-	
 	
 	// Meal Plan | Meal Balances
 	if ([currentElement isEqualToString:@"DESCRIPTION"]) {
