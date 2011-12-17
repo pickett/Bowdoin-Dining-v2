@@ -54,22 +54,27 @@
 		 mealDescription.textColor = [UIColor blackColor];
 		 mealDescription.backgroundColor = [UIColor whiteColor];
 		 mealDescription.textAlignment = UITextAlignmentCenter;
-		 [mealDescription setFont:[UIFont boldSystemFontOfSize:18.0]];
-		 
+		 // Made the font a little bigger for the grill/cafe so that it doesn't look weird without the hours
+         	 if(x != 2) [mealDescription setFont:[UIFont boldSystemFontOfSize:18.0]];
+		 else [mealDescription setFont:[UIFont boldSystemFontOfSize:20.0]];
 		 [self addSubview:mealDescription];		
 		 
 		 [mealDescription release];
 		
 		 
 		 UILabel *mealTimes = [[UILabel alloc]initWithFrame:CGRectMake(0 + (barWidth * x), 22, barWidth, 22)];
-		 mealTimes.text = timeToDisplay;
+             mealTimes.text = timeToDisplay;
 		 mealTimes.textColor = [UIColor blackColor];
 		 mealTimes.backgroundColor = [UIColor whiteColor];
 		 mealTimes.textAlignment = UITextAlignmentCenter;
 		 [mealTimes setFont:[UIFont systemFontOfSize:14.0]];
-		 
-		 [self addSubview:mealTimes];	
-		 [mealTimes release];
+		 // 12/16/11 CHANGE
+		 // Don't show the hours when the grill/cafe is being displayed
+		 // The time is different for them and can be found under "Hours" anyways
+		 if(x != 2){
+             		[self addSubview:mealTimes];	
+		 }
+         [mealTimes release];
 
 		 
 		 UILabel *leftIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset + (barWidth * x), 0, barWidth - 2*indicatorOffset, barHeight)];
