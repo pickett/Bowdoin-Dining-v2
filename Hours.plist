@@ -17,7 +17,6 @@
 					<integer>26100</integer>
 					<integer>26100</integer>
 					<integer>32400</integer>
-					<string></string>
 				</array>
 				<key>Close</key>
 				<array>
@@ -28,7 +27,6 @@
 					<integer>32400</integer>
 					<integer>32400</integer>
 					<integer>39600</integer>
-					<string></string>
 				</array>
 			</dict>
 			<key>mColdBreakfast</key>
